@@ -14,29 +14,27 @@ use App\Http\Controllers\RestaurantController;
 |
 */
 
-Route::get('/',[RestaurantController::class,'index']);
+Route::get('/',[RestaurantController::class,'index'])->name('restaurant.index');
 
-Route::get('/restaurant',[RestaurantController::class,'index']);
+Route::get('/restaurant',[RestaurantController::class,'index'])->name('restaurant.index');;
 
 Route::get('/restaurant/show/{id}',[RestaurantController::class,'show']);
+Route::get('/restaurant/show',[RestaurantController::class,'index']);
 
-Route::get('/restaurant/create',[RestaurantController::class,'create']);
+Route::get('/restaurant/create',[RestaurantController::class,'create'])->name('restaurant.create');;
 Route::post('/restaurant/create',[RestaurantController::class,'store']);
 
 
 Route::get('/restaurant/edit/{id}',[RestaurantController::class,'edit']);
 Route::patch('/restaurant/edit/{id}',[RestaurantController::class,'update']);
+Route::get('/restaurant/edit',[RestaurantController::class,'index']);
 
 Route::delete('/restaurant/destroy/{id}',[RestaurantController::class,'destroy']);
+Route::get('/restaurant/destroy',[RestaurantController::class,'index']);
 
-Route::get('/clear-cache-all', function() {
-
-    Artisan::call('cache:clear');
-
-  
-
+Route::get('/clear', function() {
+    Artisan::call('optimize:clear');
     dd("Cache Clear All");
-
 });
 
 ?>

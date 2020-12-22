@@ -3,7 +3,7 @@
 @section('title','My first page')
 
 @section('content')
-    <form action="/restaurant/edit/{{$restaurant->id}}" method="POST">
+    <form action="{{$restaurant->id}}" method="POST">
         {{ csrf_field()}}
         {{ method_field('PATCH') }}
         <label for="name">Name: </label>
