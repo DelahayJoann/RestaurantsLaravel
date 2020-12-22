@@ -56,7 +56,7 @@ class RestaurantController extends Controller
             'review' => $request['review']
         ]);
 
-        return view('restaurants\create');
+        redirect('/restaurant/create');
     }
 
     /**
@@ -103,15 +103,9 @@ class RestaurantController extends Controller
             'review' => 'required|min:1|max:1'
         ]);
 
-        Restaurant::where("id", $id)->update([
-            'name' => $request['name'],
-            'address' => $request['address'],
-            'zipCode' => $request['zipCode'],
-            'town' => $request['town'],
-            'country' => $request['country'],
-            'description' => $request['description'],
-            'review' => $request['review']
-        ]);
+        Restaurant::where("id", $id)->update($request->all());
+
+        redirect('/restaurant/show/'.$id);
     }
 
     /**
@@ -122,6 +116,7 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Restaurant::where("id", $id)->delete();
+        redirect('/restaurant');
     }
 }
